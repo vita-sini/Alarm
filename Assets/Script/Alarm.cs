@@ -14,6 +14,7 @@ public class Alarm : MonoBehaviour
 
     private float _step = 0.1f;
     private float _targetVolume;
+    private float delay = 0.5f;
 
     private Coroutine _coroutine;
 
@@ -60,10 +61,12 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator ChangeSound()
     {
+        var wait = new WaitForSeconds(delay);
+
         while (_targetVolume == 1 || _targetVolume == 0)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _targetVolume, _step);
-            yield return new WaitForSeconds(0.5f);
+            yield return wait;
         }
     }
 }
